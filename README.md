@@ -11,7 +11,7 @@
 
 ## Possible Security Flaws and Exploitation
 
-1. Internet-facing ALB is directly exposed to the internet. Any service behind could be potentially eroded or attacked. An attacker could scan for endpoints, brute-force unauthorised access or any exploit vulnerabilities in exposed services
+1. Internet-facing ALB is directly exposed to the internet. Any service behind could be potentially exploited or attacked. An attacker could scan for endpoints, brute-force unauthorised access or any exploit vulnerabilities in exposed services
 
 2. Traffic flows through multiple load balancers across VPC with Transit Gateway. If routing tables or security groups are misconfigured, workload internal service may be exposed to unintended sources. An attacker who manage to get access to the internet-facing VPC could potentially reach internal ALB and ECS services
 
@@ -33,11 +33,11 @@ Recommend to use AWS EventBrige + Lambda function.
    - Calls the Hacker News API endpoint to retrieve the latest stories
    - Processes the data
    - Check and remove any duplicate records
-   - Stores new stories in the data
+   - Stores new stories in the database
 
 This approach is cost effective since resources are only used during lambda execution and it allows fast deployment and easy maintenance
 
-If the complexity grows overtime, the system can be migrated to alterntive approach - EventBridge + ECS/Fargate where the the ECS service worker performs the processing. This migration would be relatively straightforward
+If the complexity grows overtime, the system can be migrated to alternative approach - EventBridge + ECS/Fargate where the the ECS service worker performs the processing. This migration would be relatively straightforward
 
 ## LLMs in the System
 
@@ -49,10 +49,10 @@ If the complexity grows overtime, the system can be migrated to alterntive appro
 
 
 ## Additional Architecture Improvements
-1. **Simplify the Load Balancer Flow** - The load balancer flow could be simplifed by removing the internal NLB and route traffic directly from Internet-facing ALB to the internal ALB. This would reduce latency, lower infrastructure costs and simplify the operational complexity while maintaining public and private resources
+1. **Simplify the Load Balancer Flow** - The load balancer flow could be simplified by removing the internal NLB and route traffic directly from Internet-facing ALB to the internal ALB. This would reduce latency, lower infrastructure costs and simplify the operational complexity while maintaining public and private resources
 
 
-2. **Use PostgreSQL instead of Aurora** - If there is no specific reason to user AWS Aurora features, I will suggest to use AWS RDS PostgreSQL. Compared to AWS Aurora, RDS PostgreSQL is less expensive, simpler to manage and sufficient for E2E testing environment
+2. **Use PostgreSQL instead of Aurora** - If there is no specific reason to use AWS Aurora features, I will suggest to use AWS RDS PostgreSQL. Compared to AWS Aurora, RDS PostgreSQL is less expensive, simpler to manage and sufficient for E2E testing environment
 
 # Setup Guide
 
@@ -68,7 +68,7 @@ If the complexity grows overtime, the system can be migrated to alterntive appro
 # Copy example variables and edit with your values
 cp terraform.tfvars.example terraform.tfvars
 
-Do remember to replace and set the master_password (require at least 8 character) in terraform.tfvars file
+# IMPORTANT: Replace and set the master_password (requires at least 8 characters) in terraform.tfvars
 
 # Initialize, validate, and deploy
 terraform init
