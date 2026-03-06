@@ -78,7 +78,7 @@ terraform plan
 terraform apply
 ```
 
-After successful deployment, access the echoserver by copying the `internet_alb_dns` output from the terminal and paste it into your browser. You should see the echoserver request details
+After successful deployment, access the echoserver by copying the `internet_alb_dns` output from the terminal and paste it into your browser. You should see the echoserver request details on the webpage
 
 ## Cleanup
 
