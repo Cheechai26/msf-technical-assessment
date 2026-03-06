@@ -116,7 +116,9 @@ resource "aws_lb_listener" "nlb" {
 resource "aws_lb_target_group_attachment" "nlb_to_alb" {
     target_group_arn = aws_lb_target_group.nlb.arn
     target_id        = aws_lb.workload_alb.arn
-    port             = var.aws_lb_listener.workload_alb.port
+    port             = var.container_port
+
+    depends_on = [aws_lb_listener.workload_alb]
 }
 
 # Workload ALB
