@@ -23,9 +23,9 @@ output "gateway_subnet_ids" {
     value       = aws_subnet.gateway[*].id
 }
 
-output "tgw_subnet_id" {
-    description = "ID of the TGW subnet"
-    value       = aws_subnet.tgw.id
+output "tgw_subnet_ids" {
+    description = "IDs of the TGW subnets"
+    value       = aws_subnet.tgw[*].id
 }
 
 output "nat_gateway_id" {

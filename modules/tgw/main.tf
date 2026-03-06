@@ -10,7 +10,7 @@ resource "aws_ec2_transit_gateway" "this" {
 resource "aws_ec2_transit_gateway_vpc_attachment" "internet" {
     transit_gateway_id                              = aws_ec2_transit_gateway.this.id
     vpc_id                                          = var.internet_vpc_id 
-    subnet_ids                                      = [var.internet_tgw_subnet_id]
+    subnet_ids                                      = var.internet_tgw_subnet_ids
     transit_gateway_default_route_table_association = false
     transit_gateway_default_route_table_propagation = false
     tags                                            = merge(var.tags, { Name = "${var.name}-tgw-attach-internet" })

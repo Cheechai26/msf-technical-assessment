@@ -8,9 +8,9 @@ variable "internet_vpc_id" {
     type        = string
 }
 
-variable "internet_tgw_subnet_id" {
-    description = "Subnet ID in the Internet VPC"
-    type        = string
+variable "internet_tgw_subnet_ids" {
+    description = "Subnet IDs in the Internet VPC for TGW attachment"
+    type        = list(string)
 }
 
 variable "internet_gateway_route_table_id" {

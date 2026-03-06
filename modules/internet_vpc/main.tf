@@ -27,10 +27,11 @@ resource "aws_subnet" "gateway" {
 }
 
 resource "aws_subnet" "tgw" {
+    count             = length(var.tgw_subnet_cidrs)
     vpc_id            = aws_vpc.this.id
-    cidr_block        = var.tgw_subnet_cidr
-    availability_zone = var.availability_zones[0]
-    tags              = merge(var.tags, { Name = "${var.name}-internet-tgw"})
+    cidr_block        = var.tgw_subnet_cidrs[count.index]
+    availability_zone = var.availability_zones[count.index]
+    tags              = merge(var.tags, { Name = "${var.name}-internet-tgw-${var.availability_zones[count.index]}"})
 }
 
 # NAT Gateway
@@ -91,6 +92,7 @@ resource "aws_route_table" "tgw" {
 }
 
 resource "aws_route_table_association" "tgw" {
-    subnet_id      = aws_subnet.tgw.id
+    count          = length(var.tgw_subnet_cidrs)
+    subnet_id      = aws_subnet.tgw[count.index].id
     route_table_id = aws_route_table.tgw.id
 }

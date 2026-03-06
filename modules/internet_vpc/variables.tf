@@ -23,9 +23,9 @@ variable "gateway_subnet_cidrs" {
     type        = list(string)
 }
 
-variable "tgw_subnet_cidr" {
-    description = "CIDR block for tgw subnet"
-    type        = string
+variable "tgw_subnet_cidrs" {
+    description = "CIDR blocks for tgw subnets"
+    type        = list(string)
 }
 
 variable "tags" {

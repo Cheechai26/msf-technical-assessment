@@ -37,9 +37,9 @@ variable "gateway_subnet_cidrs" {
     type        = list(string)
 }
 
-variable "tgw_subnet_cidr_internet" {
-    description = "CIDR block for TGW subnet in Internet VPC"
-    type        = string
+variable "tgw_subnet_cidrs_internet" {
+    description = "CIDR blocks for TGW subnets in Internet VPC"
+    type        = list(string)
 }
 
 # Workload VPC

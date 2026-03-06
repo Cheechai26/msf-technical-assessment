@@ -28,7 +28,7 @@ module "internet_vpc" {
     availability_zones    = var.availability_zones
     firewall_subnet_cidr  = var.firewall_subnet_cidr
     gateway_subnet_cidrs  = var.gateway_subnet_cidrs
-    tgw_subnet_cidr       = var.tgw_subnet_cidr_internet
+    tgw_subnet_cidrs      = var.tgw_subnet_cidrs_internet
     tags                  = var.tags
 }
 
@@ -50,7 +50,7 @@ module "tgw" {
 
     name                            = var.project_name
     internet_vpc_id                 = module.internet_vpc.vpc_id
-    internet_tgw_subnet_id          = module.internet_vpc.tgw_subnet_id
+    internet_tgw_subnet_ids         = module.internet_vpc.tgw_subnet_ids
     internet_gateway_route_table_id = module.internet_vpc.gateway_route_table_id
     internet_tgw_route_table_id     = module.internet_vpc.tgw_route_table_id
     nat_gateway_id                  = module.internet_vpc.nat_gateway_id

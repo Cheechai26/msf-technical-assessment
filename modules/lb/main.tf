@@ -131,7 +131,7 @@ resource "aws_security_group" "workload_alb" {
         from_port   = var.container_port
         to_port     = var.container_port
         protocol    = "tcp"
-        cidr_blocks = [var.workload_vpc_cidr]
+        cidr_blocks = [var.workload_vpc_cidr, var.internet_vpc_cidr]
     }
 
     egress {
