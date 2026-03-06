@@ -85,3 +85,11 @@ After successful deployment, access the echoserver by copying the `internet_alb_
 ```bash
 terraform destroy
 ```
+
+## Next Step
+- Setup CI/CD pipeline
+Implement CI/CD pipeline to automate infrastructure deployment and validation. The pipeline would:
+   - Run `terraform validate` to ensure the formatting is correct
+   - Execute `terraform plan` to review changes
+   - Deploy infrastructure automatically using `terraform apply` after approval
+   - Approval step to execute `terraform destory` to destroy the whole infrastructure 
