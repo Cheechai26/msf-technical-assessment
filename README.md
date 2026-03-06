@@ -54,13 +54,14 @@ If the complexity grows overtime, the system can be migrated to alternative appr
 
 2. **Use PostgreSQL instead of Aurora** - If there is no specific reason to use AWS Aurora features, I will suggest to use AWS RDS PostgreSQL. Compared to AWS Aurora, RDS PostgreSQL is less expensive, simpler to manage and sufficient for E2E testing environment
 
+
 # Setup Guide
 
 ## Prerequisites
 
 - Terraform >= 1.5.0
 - AWS CLI configured with valid credentials
-- Sufficient IAM permissions for VPC, ECS, RDS, ELB, and Transit Gateway
+- IAM permissions for VPC, ECS, RDS, ELB, and Transit Gateway
 
 ## Usage
 
@@ -77,11 +78,7 @@ terraform plan
 terraform apply
 ```
 
-After deployment, access the echoserver:
-
-```bash
-curl http://$(terraform output -raw internet_alb_dns)
-```
+After successful deployment, access the echoserver by copying the `internet_alb_dns` output from the terminal and paste it into your browser. You should see the echoserver request details
 
 ## Cleanup
 
