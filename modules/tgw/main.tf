@@ -56,13 +56,33 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "workload_to_internet
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.internet.id
 }
 
+resource "aws_ec2_transit_gateway_route" "workload_default" {
+  destination_cidr_block         = "0.0.0.0/0"
+  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.internet.id
+  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.workload.id
+}
+
 # VPC routes
+resource "aws_route" "internet_tgw_to_nat" {
+    route_table_id         = var.internet_tgw_route_table_id
+    destination_cidr_block = "0.0.0.0/0"
+    nat_gateway_id         = var.nat_gateway_id
+}
+
 resource "aws_route" "internet_to_workload" {
     route_table_id         = var.internet_gateway_route_table_id
     destination_cidr_block = var.workload_vpc_cidr
     transit_gateway_id     = aws_ec2_transit_gateway.this.id
 
     depends_on             = [ aws_ec2_transit_gateway_vpc_attachment.internet ]
+}
+
+resource "aws_route" "workload_web_to_egress" {
+    route_table_id         = var.workload_web_route_table_id
+    destination_cidr_block = "0.0.0.0/0"
+    transit_gateway_id     = aws_ec2_transit_gateway.this.id
+
+    depends_on             = [ aws_ec2_transit_gateway_vpc_attachment.workload ]
 }
 
 resource "aws_route" "workload_to_egress" {

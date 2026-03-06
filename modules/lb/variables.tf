@@ -18,6 +18,11 @@ variable "workload_vpc_cidr" {
     type        = string
 }
 
+variable "internet_vpc_cidr" {
+    description = "CIDR block for Internet VPC"
+    type        = string
+}
+
 variable "gateway_subnet_ids" {
     description = "Gateway Subnet IDs"
     type        = list(string)

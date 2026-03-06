@@ -52,8 +52,11 @@ module "tgw" {
     internet_vpc_id                 = module.internet_vpc.vpc_id
     internet_tgw_subnet_id          = module.internet_vpc.tgw_subnet_id
     internet_gateway_route_table_id = module.internet_vpc.gateway_route_table_id
+    internet_tgw_route_table_id     = module.internet_vpc.tgw_route_table_id
+    nat_gateway_id                  = module.internet_vpc.nat_gateway_id
     workload_vpc_id                 = module.workload_vpc.vpc_id
     workload_tgw_subnet_id          = module.workload_vpc.tgw_subnet_id
+    workload_web_route_table_id     = module.workload_vpc.web_route_table_id
     workload_app_route_table_id     = module.workload_vpc.app_route_table_id
     workload_vpc_cidr               = module.workload_vpc.vpc_cidr
     tags                            = var.tags
@@ -66,6 +69,7 @@ module "lb" {
     internet_vpc_id    = module.internet_vpc.vpc_id
     workload_vpc_id    = module.workload_vpc.vpc_id
     workload_vpc_cidr  = module.workload_vpc.vpc_cidr
+    internet_vpc_cidr  = module.internet_vpc.vpc_cidr
     gateway_subnet_ids = module.internet_vpc.gateway_subnet_ids
     web_subnet_ids     = module.workload_vpc.web_subnet_ids
     nlb_private_ips    = var.nlb_private_ips

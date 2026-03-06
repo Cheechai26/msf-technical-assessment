@@ -18,6 +18,16 @@ variable "internet_gateway_route_table_id" {
     type        = string
 }
 
+variable "internet_tgw_route_table_id" {
+    description = "Route table ID in the Internet VPC TGW subnet that requires NAT egress route"
+    type        = string
+}
+
+variable "nat_gateway_id" {
+    description = "NAT Gateway ID in the Internet VPC for outbound internet access"
+    type        = string
+}
+
 variable "workload_vpc_id" {
     description = "ID of the workload VPC to attach to TGW"
     type        = string
@@ -25,6 +35,11 @@ variable "workload_vpc_id" {
 
 variable "workload_tgw_subnet_id" {
     description = "Subnet ID in the Workload VPC"
+    type        = string
+}
+
+variable "workload_web_route_table_id" {
+    description = "Route table ID in the Workload VPC web subnet that require default egress thru TGW"
     type        = string
 }
 
